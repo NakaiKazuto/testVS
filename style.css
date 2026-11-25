@@ -11,6 +11,9 @@ h1 span { color: #77aa81; }
 .instructions h2, .garden-panel h2 { font-size: 15px; margin: 0 0 14px; }
 .instructions p, .garden-panel > p:not(.eyebrow):not(.flower-count) { color: #789080; font-size: 12px; line-height: 2; }
 kbd { display: inline-block; min-width: 22px; text-align: center; background: #fff; border: 1px solid #e3ebe0; border-radius: 5px; font: 11px "DM Sans", sans-serif; color: #64816d; padding: 1px 3px; }
+.level-control { display: grid; gap: 7px; margin-top: 20px; color: #789080; font-size: 12px; }
+.level-control select { width: 100%; padding: 9px 10px; border: 1px solid #d5e4d3; border-radius: 9px; background: #fffdf8; color: #486b53; font: inherit; }
+.level-control select:focus-visible { outline: 3px solid #6f9c79; outline-offset: 3px; }
 .game-area { background: #fffdf8; padding: 18px; border: 1px solid #fff; border-radius: 26px; box-shadow: 0 18px 55px #789f8029, 0 3px 12px #789f8012; }
 .game-top { height: 58px; display: flex; align-items: flex-start; gap: 20px; padding: 0 3px; }
 .game-top > div:first-child { flex: 1; }

@@ -2,7 +2,13 @@
 
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const { Game, emptyBoard, canPlace, findMatches, applyGravity } = require("./game.js");
+const { Game, emptyBoard, canPlace, findMatches, applyGravity, getDropInterval } = require("./game.js");
+
+test("game levels set progressively faster drop intervals", () => {
+  assert.ok(getDropInterval("easy") > getDropInterval("normal"));
+  assert.ok(getDropInterval("normal") > getDropInterval("hard"));
+  assert.throws(() => getDropInterval("unknown"), RangeError);
+});
 
 test("finds all simultaneous groups but not diagonal or smaller groups", () => {
   const board = emptyBoard();

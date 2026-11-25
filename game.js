@@ -4,6 +4,18 @@ const WIDTH = 6;
 const HEIGHT = 12;
 const COLORS = ["red", "blue", "yellow", "purple"];
 const DIRECTIONS = [[0, -1], [1, 0], [0, 1], [-1, 0]];
+const DROP_INTERVALS = new Map([
+  ["easy", 900],
+  ["normal", 650],
+  ["hard", 400]
+]);
+
+function getDropInterval(level) {
+  if (!DROP_INTERVALS.has(level)) {
+    throw new RangeError(`Unknown game level: ${level}`);
+  }
+  return DROP_INTERVALS.get(level);
+}
 
 function emptyBoard() {
   return Array.from({ length: HEIGHT }, () => Array(WIDTH).fill(null));
@@ -147,7 +159,7 @@ class Game {
 }
 
 if (typeof module !== "undefined" && module.exports) {
-  module.exports = { Game, emptyBoard, canPlace, findMatches, applyGravity };
+  module.exports = { Game, emptyBoard, canPlace, findMatches, applyGravity, getDropInterval };
 }
 
 if (typeof document !== "undefined") {
@@ -164,6 +176,7 @@ if (typeof document !== "undefined") {
   const next = document.getElementById("next");
   const flowers = document.getElementById("flowers");
   const garden = document.getElementById("garden");
+  const levelSelect = document.getElementById("level");
   const chain = document.getElementById("chain");
   const message = document.getElementById("message");
   const messageTitle = document.getElementById("message-title");
@@ -256,6 +269,9 @@ if (typeof document !== "undefined") {
     button.addEventListener("click", () => act(button.dataset.action));
   });
   pauseButton.addEventListener("click", togglePause);
+  levelSelect.addEventListener("change", () => {
+    elapsed = 0;
+  });
   document.getElementById("restart").addEventListener("click", restart);
   messageAction.addEventListener("click", () => paused ? togglePause() : restart());
 
@@ -264,7 +280,7 @@ if (typeof document !== "undefined") {
     lastTime = time;
     if (!paused && game.state !== "over") {
       elapsed += delta;
-      const interval = game.state === "clearing" ? 350 : 650;
+      const interval = game.state === "clearing" ? 350 : getDropInterval(levelSelect.value);
       if (elapsed >= interval) {
         elapsed = 0;
         if (game.state === "clearing") game.finishClear();
