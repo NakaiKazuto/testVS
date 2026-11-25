@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#e9f4e3">
+  <title>しずくガーデン</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="game.js"></script>
+</head>
+<body>
+  <main class="layout">
+    <header class="intro">
+      <p class="eyebrow">A LITTLE PUZZLE GARDEN</p>
+      <h1>しずく<span>ガーデン</span></h1>
+      <p class="description">しずくをつなげて、<br>あなただけの庭を咲かせよう。</p>
+      <div class="instructions">
+        <h2>あそびかた</h2>
+        <p>同じ色を <strong>4つ</strong> つなげると花が咲きます。続けて消すと連鎖！</p>
+        <p><kbd>←</kbd> <kbd>→</kbd> 移動　<kbd>↑</kbd> 回転<br><kbd>↓</kbd> はやく落とす　<kbd>Esc</kbd> 一時停止</p>
+      </div>
+    </header>
+
+    <section class="game-area" aria-label="ゲーム">
+      <div class="game-top">
+        <div><span class="label">SCORE</span><strong id="score">0</strong></div>
+        <div class="next-box"><span class="label">NEXT</span><div id="next" aria-label="次のしずく"></div></div>
+        <button id="pause" class="icon-button" type="button" aria-label="一時停止">Ⅱ</button>
+      </div>
+      <div class="board-wrap">
+        <div id="board" class="board" role="grid" aria-label="ゲーム盤面"></div>
+        <div id="message" class="overlay" hidden>
+          <div class="overlay-card">
+            <p id="message-title"></p>
+            <p id="message-detail"></p>
+            <button id="message-action" type="button"></button>
+          </div>
+        </div>
+        <div id="chain" class="chain" aria-live="polite"></div>
+      </div>
+      <div class="controls" aria-label="タッチ操作">
+        <button type="button" data-action="left" aria-label="左へ移動">←</button>
+        <button type="button" data-action="right" aria-label="右へ移動">→</button>
+        <button type="button" data-action="rotate" aria-label="回転">↻</button>
+        <button type="button" data-action="down" aria-label="下へ移動">↓</button>
+      </div>
+      <p class="hint">つなげて、咲かせて、ひとやすみ。</p>
+    </section>
+
+    <aside class="garden-panel">
+      <p class="eyebrow">YOUR GARDEN</p>
+      <h2>ちいさな庭</h2>
+      <p>しずくを消すと、<br>ここに花が咲きます。</p>
+      <div id="garden" class="garden" aria-label="咲いた花"></div>
+      <p class="flower-count"><strong id="flowers">0</strong> <span>FLOWERS BLOOMED</span></p>
+      <button id="restart" class="restart" type="button">はじめから</button>
+    </aside>
+  </main>
+</body>
+</html>
