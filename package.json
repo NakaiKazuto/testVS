@@ -1,0 +1,38 @@
+{
+  "name": "shizuku-garden",
+  "version": "1.0.0",
+  "description": "しずくガーデン - Windows desktop game",
+  "main": "electron-main.cjs",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test game.test.js",
+    "dist": "electron-builder --win nsis"
+  },
+  "build": {
+    "appId": "com.shizukugarden.game",
+    "productName": "しずくガーデン",
+    "files": [
+      "electron-main.cjs",
+      "game.js",
+      "index.html",
+      "style.css",
+      "package.json"
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  },
+  "devDependencies": {
+    "electron": "^45.5.0",
+    "electron-builder": "^26.18.0"
+  }
+}
